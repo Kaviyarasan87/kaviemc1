@@ -20,24 +20,25 @@
         }
         
         /* Hide header initially */
-        header {
-            position: fixed;
-            top: -80px; /* Move header above the viewport */
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            transition: top 0.3s ease-in-out; /* Smooth transition */
-        }
-        
-        /* When header is visible */
-        header.visible {
-            top: 0;
-        }
+       header {
+    position: fixed;
+    top: -80px; /* Initially hidden */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    transition: top 0.3s ease-in-out;
+}
+
+/* When header is visible */
+header.visible {
+    top: 0;
+}
+
         
         
         header .logo {
@@ -202,26 +203,24 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const header = document.querySelector("header");
-        
-            function showNavbar() {
+           document.addEventListener("DOMContentLoaded", function () {
+        let lastScrollTop = 0;
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll", function () {
+            let currentScroll = window.scrollY;
+
+            if (currentScroll > lastScrollTop) {
+                // User is scrolling down -> Hide Navbar
+                header.classList.remove("visible");
+            } else {
+                // User is scrolling up -> Show Navbar
                 header.classList.add("visible");
             }
-        
-            function hideNavbar() {
-                header.classList.remove("visible");
-            }
-        
-            // For Desktop: Show navbar when mouse moves near the top
-            document.addEventListener("mousemove", (event) => {
-                if (event.clientY < 50) {
-                    showNavbar();
-                } else {
-                    hideNavbar();
-                }
-            });
-        
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Prevent negative values
+        });
+    });
             // For Mobile: Show navbar when user taps near the top
             document.addEventListener("touchstart", (event) => {
                 if (event.touches[0].clientY < 50) {
