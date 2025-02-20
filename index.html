@@ -62,21 +62,25 @@
             margin-top: 100px; /* Adjust based on header height */
         }
 
-        body {
-            background: url('bk.jfif') no-repeat center center;
-            background-size: cover;  /* Ensures the image covers the entire screen */
-            background-attachment: fixed; /* Keeps the background in place while scrolling */
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            body {
-                background-size: contain; /* Ensures the full image is visible on smaller screens */
-                background-position: top center; /* Adjusts positioning */
-            }
-        }
+       body {
+    background: url('bk.jfif') no-repeat center center;
+    background-size: cover;  /* Ensures the image covers the entire screen */
+    background-attachment: fixed; /* Keeps the background in place while scrolling */
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure mobile devices also display the full background */
+@media (max-width: 768px) {
+    body {
+        background-size: cover !important; /* Forces full coverage */
+        background-position: center;
+        height: 100%;
+    }
+}
+
         
         .contact-container {
             width: 100%;
